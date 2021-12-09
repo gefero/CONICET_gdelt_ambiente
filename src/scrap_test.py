@@ -27,7 +27,7 @@ def get_article(link):
 articles = [["id", "url", "title", "text"]]
 
 it = 0
-for row in df.iloc.itertuples():
+for row in df.itertuples():
     it = it + 1
     ntot = str(df.shape[0])
     print('Fila ' + str(it) + ' de ' + ntot)
