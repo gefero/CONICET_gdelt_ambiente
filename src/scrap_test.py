@@ -4,7 +4,7 @@ import csv
 
 #%%
 #out = pd.read_csv('./data/output/out.csv')
-df = pd.read_csv('./data/input/salida_gdelt_gbq_test.csv')
+df = pd.read_csv('./data/input/bq-results-20220211-103122-INCENDIOS')
 
 #url =['https://www.diarioregistrado.com/internacionales/joe-biden-se-quedo-dormido-en-plena-cumbre-de-cambio-climatico-y-tuvieron-que-ir-a-despertarlo_a6180356e6859e41994c02a2b', 'https://www.telam.com.ar/notas/202111/574205-compromisos-metas-acuerdo--paris-cop26.html']
 
@@ -51,7 +51,7 @@ for row in df.itertuples():
 
 #%%
 
-with open("./data/output/out2.csv", "w", newline="") as f:
+with open("./data/output/scrap_incendios_202111_202201.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(articles)
     
