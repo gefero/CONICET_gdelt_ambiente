@@ -5,7 +5,7 @@ import csv
 #%%
 
 #out = pd.read_csv('./data/output/out.csv')
-df = pd.read_csv('./data/input/bq-results-20220211-103122-INCENDIOS')
+df = pd.read_csv('./data/input/bq-results-20220211-103122-INCENDIOS.csv')
 
 
 ## HACER VARIABLES DE ESTADO... RUTAS DE OUTPUT Y DEMAS
