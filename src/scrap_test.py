@@ -3,10 +3,12 @@ import pandas as pd
 import csv
 
 #%%
+
 #out = pd.read_csv('./data/output/out.csv')
 df = pd.read_csv('./data/input/bq-results-20220211-103122-INCENDIOS')
 
-#url =['https://www.diarioregistrado.com/internacionales/joe-biden-se-quedo-dormido-en-plena-cumbre-de-cambio-climatico-y-tuvieron-que-ir-a-despertarlo_a6180356e6859e41994c02a2b', 'https://www.telam.com.ar/notas/202111/574205-compromisos-metas-acuerdo--paris-cop26.html']
+
+## HACER VARIABLES DE ESTADO... RUTAS DE OUTPUT Y DEMAS
 
 #%%
 config = Config()
@@ -14,17 +16,18 @@ config.language = 'es'
 
 
 def get_article(link):
-    article = Article(url=link)
+    #article = Article(url=link, language='es')
+    article = Article(url=link, config=config)
     article.download()
     article.parse()
     
-    text = article.title
-    title = article.text
+    title = article.title
+    text = article.text
     
     return(title, text)
 #%%
 
-articles = [["id", "url", "title", "text"]]
+articles = [["id", "url", "media", "title", "text"]]
 
 it = 0
 for row in df.itertuples():
@@ -33,19 +36,20 @@ for row in df.itertuples():
     print('Fila ' + str(it) + ' de ' + ntot)
     url = row.DocumentIdentifier
     GKGID = row.GKGRECORDID
+    media = row.SourceCommonName
   
     try:
         title, text = get_article(link=url)
         print('\t' + 'OK')
     except:
-        title = 'Sin datos'
-        text = 'Sin datos'
+        title = 'Error'
+        text = 'Error'
         print('\t' + 'Error')
     
-    articles.append([GKGID, url, title, text])
-    
+    articles.append([GKGID, url, media, title, text])
+   
     if it%100 == 0:
-        with open("./data/output/out2.csv", "w", newline="") as f:
+        with open("./data/output/out_test3.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(articles)
 
